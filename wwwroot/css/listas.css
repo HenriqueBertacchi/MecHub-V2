@@ -1,0 +1,409 @@
+:root {
+    --red: #FF022E;
+    --red-dark: #d90027;
+    --white: #ffffff;
+    --card-dark: #15171b;
+    --input-dark: #0f1115;
+    --border-dark: #2a2d33;
+    --border-soft: #3a3f48;
+    --muted: #9ca3af;
+    --text: #d1d5db;
+    --blue: #3b82f6;
+    --green: #22c55e;
+    --yellow: #facc15;
+    --danger: #ff4b65;
+}
+
+/* =========================
+   PÁGINAS DE LISTA
+========================= */
+
+.clientes-page,
+.veiculos-page,
+.servicos-page,
+.ordens-page,
+.list-page {
+    padding: 32px;
+    color: var(--white);
+}
+
+.clientes-header,
+.veiculos-header,
+.servicos-header,
+.ordens-header,
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.clientes-header h1,
+.veiculos-header h1,
+.servicos-header h1,
+.ordens-header h1,
+.list-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: -.04em;
+}
+
+.clientes-header p,
+.veiculos-header p,
+.servicos-header p,
+.ordens-header p,
+.list-header p {
+    color: var(--muted);
+    margin: 6px 0 0;
+}
+
+/* =========================
+   BOTÃO NOVO
+========================= */
+
+.btn-novo-cliente,
+.btn-novo-veiculo,
+.btn-novo-servico,
+.btn-nova-ordem,
+.btn-novo {
+    background: var(--red);
+    color: var(--white);
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: .2s ease;
+    white-space: nowrap;
+}
+
+.btn-novo-cliente:hover,
+.btn-novo-veiculo:hover,
+.btn-novo-servico:hover,
+.btn-nova-ordem:hover,
+.btn-novo:hover {
+    background: var(--red-dark);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.clientes-card,
+.veiculos-card,
+.servicos-card,
+.ordens-card,
+.list-card {
+    background: var(--card-dark);
+    border: 1px solid var(--border-dark);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* =========================
+   TABELAS
+========================= */
+
+.clientes-table,
+.veiculos-table,
+.servicos-table,
+.ordens-table,
+.list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.clientes-table thead,
+.veiculos-table thead,
+.servicos-table thead,
+.ordens-table thead,
+.list-table thead {
+    background: var(--input-dark);
+}
+
+.clientes-table th,
+.clientes-table td,
+.veiculos-table th,
+.veiculos-table td,
+.servicos-table th,
+.servicos-table td,
+.ordens-table th,
+.ordens-table td,
+.list-table th,
+.list-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-dark);
+    vertical-align: middle;
+}
+
+.clientes-table th,
+.veiculos-table th,
+.servicos-table th,
+.ordens-table th,
+.list-table th {
+    color: #e5e7eb;
+    font-size: .85rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.clientes-table td,
+.veiculos-table td,
+.servicos-table td,
+.ordens-table td,
+.list-table td {
+    color: var(--text);
+}
+
+.clientes-table tbody tr:hover,
+.veiculos-table tbody tr:hover,
+.servicos-table tbody tr:hover,
+.ordens-table tbody tr:hover,
+.list-table tbody tr:hover {
+    background: #1d2026;
+}
+
+.sub-info {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.acoes-col {
+    text-align: right;
+}
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-acao {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: .85rem;
+    transition: .2s ease;
+}
+
+.btn-acao.detalhes,
+.btn-acao.editar,
+.btn-acao.status {
+    background: #262a31;
+    color: var(--white);
+    border: 1px solid var(--border-soft);
+}
+
+.btn-acao.detalhes:hover,
+.btn-acao.editar:hover,
+.btn-acao.status:hover {
+    background: #343944;
+    color: var(--white);
+}
+
+.btn-acao.pdf {
+    background: rgba(34, 197, 94, .15);
+    color: var(--green);
+    border: 1px solid rgba(34, 197, 94, .35);
+}
+
+.btn-acao.pdf:hover {
+    background: var(--green);
+    color: var(--white);
+}
+
+.btn-acao.excluir {
+    background: rgba(255, 2, 46, .12);
+    color: var(--danger);
+    border: 1px solid rgba(255, 2, 46, .35);
+}
+
+.btn-acao.excluir:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.status-badge,
+.tipo-badge {
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: .8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.tipo-badge,
+.status-badge.aberta,
+.status-badge.preavaliacao {
+    background: rgba(59, 130, 246, .15);
+    color: var(--blue);
+}
+
+.status-badge.emandamento,
+.status-badge.emreparo {
+    background: rgba(255, 2, 46, .15);
+    color: var(--red);
+}
+
+.status-badge.aguardandoaprovacao {
+    background: rgba(250, 204, 21, .15);
+    color: var(--yellow);
+}
+
+.status-badge.fechada,
+.status-badge.prontopararetirada {
+    background: rgba(34, 197, 94, .15);
+    color: var(--green);
+}
+
+.status-badge.naoinformado {
+    background: rgba(107, 114, 128, .15);
+    color: var(--muted);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 48px 20px;
+}
+
+.empty-state h2 {
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+
+    .clientes-page,
+    .veiculos-page,
+    .servicos-page,
+    .ordens-page,
+    .list-page {
+        padding: 20px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .clientes-table,
+    .veiculos-table,
+    .servicos-table,
+    .ordens-table,
+    .list-table {
+        min-width: 900px;
+    }
+
+    .clientes-card,
+    .veiculos-card,
+    .servicos-card,
+    .ordens-card,
+    .list-card {
+        padding: 16px;
+    }
+
+    .clientes-header,
+    .veiculos-header,
+    .servicos-header,
+    .ordens-header,
+    .list-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .clientes-header h1,
+    .veiculos-header h1,
+    .servicos-header h1,
+    .ordens-header h1,
+    .list-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .clientes-header p,
+    .veiculos-header p,
+    .servicos-header p,
+    .ordens-header p,
+    .list-header p {
+        font-size: .92rem;
+    }
+
+    .btn-novo-cliente,
+    .btn-novo-veiculo,
+    .btn-novo-servico,
+    .btn-nova-ordem,
+    .btn-novo {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .acoes-col {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .acoes {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+
+    .btn-acao {
+        min-width: 82px;
+        height: 36px;
+        padding: 0 12px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: .85rem;
+        line-height: 1;
+        transition: .2s ease;
+        white-space: nowrap;
+    }
+
+    .btn-acao {
+        width: 100%;
+        text-align: center;
+    }
+}

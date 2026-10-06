@@ -1,0 +1,292 @@
+:root {
+        --red: #FF022E;
+        --red-dark: #d90027;
+        --black: #000;
+        --dark: #1d2024;
+        --border: #333;
+        --text-muted: #9ca3af;
+        --white: #fff;
+    }
+
+    body {
+        background: var(--black);
+        color: var(--white);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .home-navbar {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        padding: 18px 28px;
+    }
+
+    .logo {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: white !important;
+        text-decoration: none;
+    }
+
+    .nav-link-custom {
+        color: white !important;
+        font-weight: 700;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+    .nav-link-custom:hover {
+        color: var(--red) !important;
+    }
+
+    .btn-outline-home {
+        border: 2px solid white;
+        color: white !important;
+        border-radius: 9px;
+        padding: 8px 22px;
+        font-weight: 700;
+        text-decoration: none;
+        margin: 8px 5px;
+    }
+
+    .btn-outline-home:hover {
+        background: white;
+        color: black !important;
+    }
+
+    .btn-red {
+        background: var(--red);
+        color: white !important;
+        border-radius: 9px;
+        padding: 10px 22px;
+        font-weight: 800;
+        border: none;
+        text-decoration: none;
+        margin: 8px 5px;
+    }
+
+    .btn-red:hover {
+        background: var(--red-dark);
+        color: white !important;
+    }
+
+    .navbar-toggler {
+        border: 2px solid white;
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+    .mobile-menu {
+        transition: all .35s ease;
+    }
+
+    .hero {
+        min-height: 100vh;
+        background:
+            linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.75)),
+            url('/img/imagem-fundo-inicio.png');
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: 120px 20px 60px;
+    }
+
+    .hero-content {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .hero-brand-vertical {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        color: var(--red);
+        font-size: 3.8rem;
+        font-weight: 900;
+        line-height: 1;
+    }
+
+    .hero h1 {
+        font-size: 3.4rem;
+        font-weight: 900;
+        margin: 0;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+        font-weight: 900;
+        max-width: 760px;
+    }
+
+    .hero h2 span {
+        color: var(--red);
+    }
+
+    .hero h1,
+    .hero h2 {
+        text-shadow: 0 4px 18px rgba(0,0,0,.7);
+    }
+
+    .section-title {
+        background: var(--red);
+        color: white;
+        display: inline-block;
+        padding: 15px 34px;
+        border-radius: 7px;
+        font-size: 1.45rem;
+        font-weight: 900;
+        margin-bottom: 55px;
+    }
+
+    .section {
+        padding: 80px 0;
+    }
+
+    .service-card {
+        background: var(--dark);
+        border: 4px solid var(--border);
+        border-radius: 15px;
+        min-height: 260px;
+        padding: 24px;
+        text-align: center;
+        transition: .2s;
+    }
+
+    .service-card:hover,
+    .why-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--red);
+    }
+
+    .circle-icon {
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        font-size: 2.6rem;
+    }
+
+    .red-circle { background: var(--red); }
+    .purple-circle { background: #704CF0; }
+    .lime-circle { background: #E8FF16; color: black; }
+    .green-circle { background: #66F013; color: black; }
+    .blue-circle { background: #4B5CFF; }
+    .orange-circle { background: #F57900; }
+
+    .service-card h3 {
+        font-weight: 900;
+        font-size: 1.25rem;
+    }
+
+    .service-card p,
+    .why-card p {
+        color: var(--text-muted);
+        font-size: 1.15rem;
+        line-height: 1.15;
+    }
+
+    .service-card strong,
+    .why-card strong {
+        color: #b7c0d1;
+    }
+
+    .why-card {
+        background: var(--dark);
+        border: 4px solid var(--border);
+        border-radius: 15px;
+        padding: 28px;
+        min-height: 235px;
+        display: flex;
+        gap: 22px;
+        align-items: flex-start;
+        transition: .2s;
+    }
+
+    .why-card .emoji {
+        font-size: 4.2rem;
+        min-width: 82px;
+    }
+
+    .why-card h3 {
+        font-size: 1.45rem;
+        font-weight: 900;
+        line-height: 1.05;
+    }
+
+    .about-text {
+        font-size: 1.22rem;
+        line-height: 1.22;
+    }
+
+    .about-img {
+        width: 100%;
+        max-width: 520px;
+        filter: drop-shadow(0 0 35px rgba(255,255,255,.12));
+    }
+
+    @media (max-width: 991px) {
+        .home-navbar {
+            position: absolute;
+            background: rgba(0, 0, 0, .88);
+            padding: 14px 18px;
+        }
+
+        .mobile-menu {
+            background: rgba(20, 20, 20, .97);
+            border: 1px solid #333;
+            border-radius: 16px;
+            margin-top: 16px;
+            padding: 18px;
+        }
+
+        .mobile-menu .nav-link-custom,
+        .mobile-menu .btn-outline-home,
+        .mobile-menu .btn-red {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 8px 5px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        .hero-content {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero-brand-vertical {
+            writing-mode: horizontal-tb;
+            transform: none;
+            font-size: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+        }
+
+        .why-card {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+    }

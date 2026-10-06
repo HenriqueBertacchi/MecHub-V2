@@ -1,0 +1,45 @@
+@model MecHub.ViewModel.EsqueciSenhaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Esqueci minha senha";
+}
+
+<main class="login-page">
+    <section class="login-card">
+
+        <div class="brand-background">
+            MECHUB
+        </div>
+
+        <h1>Recuperar senha</h1>
+
+        <p class="login-description">
+            Informe o e-mail cadastrado. Se ele existir, enviaremos um link seguro para redefinir sua senha.
+        </p>
+
+        <form asp-controller="Auth" asp-action="EsqueciSenha" method="post" class="login-form">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="input-group-login">
+                <input asp-for="Email" placeholder="E-mail cadastrado" autocomplete="email" />
+                <span asp-validation-for="Email" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Enviar link de recuperação
+            </button>
+
+            <a asp-controller="Auth" asp-action="LoginLocal" class="forgot-password text-center mt-3">
+                Voltar para o login
+            </a>
+        </form>
+
+    </section>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

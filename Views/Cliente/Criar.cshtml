@@ -1,0 +1,107 @@
+@model MecHub.ViewModel.ClienteCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+
+<section class="form-page">
+
+    <div class="form-header">
+        <div>
+            <span class="form-eyebrow">Cadastro</span>
+            <h1>Novo Cliente</h1>
+            <p>Cadastre clientes para associar veículos, ordens de serviço e atendimentos.</p>
+        </div>
+
+        <a asp-controller="Cliente"
+                   asp-action="Index"
+                   class="btn-close-form">
+                    ×
+        </a>
+    </div>
+
+    <div class="form-card">
+
+        <form asp-controller="Cliente" asp-action="Criar" method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <input type="hidden" />
+
+            <div class="form-section-title">
+                <h4>Dados do cliente</h4>
+                <p>Preencha as informações principais para registrar o cliente no sistema.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label asp-for="Nome" class="form-label">Nome completo</label>
+
+                    <input asp-for="Nome" class="form-control input-dark" placeholder="Ex: João da Silva" />
+
+                    <span asp-validation-for="Nome" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Email" class="form-label">E-mail</label>
+
+                    <input asp-for="Email" class="form-control input-dark" placeholder="cliente@email.com" />
+
+                    <span asp-validation-for="Email" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Telefone" class="form-label">Telefone</label>
+
+                    <input asp-for="Telefone" class="form-control input-dark" placeholder="(11) 99999-9999" />
+
+                    <span asp-validation-for="Telefone" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Cpf" class="form-label">CPF</label>
+
+                    <input asp-for="Cpf" class="form-control input-dark" placeholder="Somente números" maxlength="11" />
+
+                    <span asp-validation-for="Cpf" class="field-error"></span>
+                </div>
+
+            </div>
+
+            <div class="form-info-box">
+                <strong>Dica:</strong>
+                cadastre o cliente antes de registrar o veículo. Assim você consegue associar placa, modelo e futuras
+                ordens de serviço corretamente.
+            </div>
+
+            <div class="form-actions">
+
+                <a asp-controller="Cliente" asp-action="Index" class="btn-cancel">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="btn-save">
+                    Salvar Cliente
+                </button>
+                @* 
+                <button type="submit" class="btn-salvar">
+                    Salvar Cliente
+                </button> *@
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

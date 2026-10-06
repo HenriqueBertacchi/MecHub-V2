@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="ErroLogin" xml:space="preserve">
+    <value>Usuário ou senha inválidos.</value>
+  </data>
+
+  <data name="CampoObrigatorio" xml:space="preserve">
+    <value>Este campo é obrigatório.</value>
+  </data>
+</root>

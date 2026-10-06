@@ -1,0 +1,99 @@
+@model MecHub.ViewModel.ServicoCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Novo Serviço";
+}
+
+<link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+
+<section class="form-page">
+
+    <div class="form-header">
+        <div>
+            <span class="form-eyebrow">Cadastro</span>
+            <h1>Novo Serviço</h1>
+            <p>Cadastre serviços para serem adicionados às ordens de serviço.</p>
+        </div>
+
+        <a asp-controller="Servico"
+           asp-action="Index"
+           class="btn-close-form">
+            ×
+        </a>
+    </div>
+
+    <div class="form-card">
+
+        <form asp-controller="Servico" asp-action="Criar" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-section-title">
+                <h4>Dados do serviço</h4>
+                <p>Informe a descrição, categoria e valor base do serviço.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label asp-for="Descricao" class="form-label">Descrição</label>
+
+                    <input asp-for="Descricao"
+                           class="form-control input-dark"
+                           placeholder="Ex: Troca de óleo" />
+
+                    <span asp-validation-for="Descricao" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Tipo" class="form-label">Tipo</label>
+
+                    <input asp-for="Tipo"
+                           class="form-control input-dark"
+                           placeholder="Ex: Manutenção preventiva" />
+
+                    <span asp-validation-for="Tipo" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Valor" class="form-label">Valor</label>
+
+                    <input asp-for="Valor"
+                           class="form-control input-dark"
+                           placeholder="Ex: 150,00" />
+
+                    <span asp-validation-for="Valor" class="field-error"></span>
+                </div>
+
+            </div>
+
+            <div class="form-info-box">
+                <strong>Dica:</strong>
+                este serviço poderá ser selecionado na criação da Ordem de Serviço e terá seu valor somado ao total da OS.
+            </div>
+
+            <div class="form-actions">
+
+                <a asp-controller="Servico"
+                   asp-action="Index"
+                   class="btn-cancel">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="btn-save">
+                    Salvar Serviço
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,75 @@
+@model MecHub.ViewModel.ResetarSenhaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Redefinir senha";
+}
+
+<main class="login-page">
+    <section class="login-card">
+
+        <div class="brand-background">
+            MECHUB
+        </div>
+
+        <h1>Nova senha</h1>
+
+        <p class="login-description">
+            Crie uma nova senha para acessar sua conta. Esse link é temporário e só pode ser usado uma vez.
+        </p>
+
+        <form asp-controller="Auth" asp-action="ResetarSenha" method="post" class="login-form">
+            @Html.AntiForgeryToken()
+
+            <input type="hidden" asp-for="Email" />
+            <input type="hidden" asp-for="Token" />
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="input-group-login password-group">
+                <input asp-for="NovaSenha" id="novaSenha" placeholder="Nova senha" autocomplete="new-password" />
+
+                <button type="button" class="toggle-password" onclick="toggleNovaSenha()">
+                    👁
+                </button>
+
+                <span asp-validation-for="NovaSenha" class="field-error"></span>
+            </div>
+
+            <div class="input-group-login password-group">
+                <input asp-for="ConfirmarSenha" id="confirmarSenha" placeholder="Confirmar nova senha" autocomplete="new-password" />
+
+                <button type="button" class="toggle-password" onclick="toggleConfirmarSenha()">
+                    👁
+                </button>
+
+                <span asp-validation-for="ConfirmarSenha" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="btn-login">
+                Redefinir senha
+            </button>
+
+            <a asp-controller="Auth" asp-action="LoginLocal" class="forgot-password text-center mt-3">
+                Voltar para o login
+            </a>
+        </form>
+
+    </section>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function toggleNovaSenha() {
+            const input = document.getElementById("novaSenha");
+            input.type = input.type === "password" ? "text" : "password";
+        }
+
+        function toggleConfirmarSenha() {
+            const input = document.getElementById("confirmarSenha");
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+}

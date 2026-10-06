@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MecHub</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/mecanico.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/modal-delete.css" asp-append-version="true" />
+    <script src="~/js/modal-delete.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <div class="mobile-topbar">
+        <button type="button" class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+        <a asp-controller="Mecanico" asp-action="Index" class="mobile-brand">
+            <span>Mec</span>Hub
+        </a>
+    </div>
+
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-layout">
+
+        <aside class="sidebar" id="sidebarMenu">
+            <div class="sidebar-brand">
+                <span>Mec</span>Hub
+            </div>
+
+            <nav class="sidebar-nav">
+                <a asp-controller="Mecanico" asp-action="Index" class="nav-item">🏠 Dashboard</a>
+                <a asp-controller="OrdemServico" asp-action="Index" class="nav-item">📋 Ordens de Serviço</a>
+                <a asp-controller="Servico" asp-action="Index" class="nav-item">🛠️ Serviços</a>
+                <a asp-controller="Veiculos" asp-action="Index" class="nav-item">🚗 Veículos</a>
+                <a asp-controller="Cliente" asp-action="Index" class="nav-item">👥 Clientes</a>
+            </nav>
+
+            <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-form">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="logout-btn">🚪 Sair</button>
+            </form>
+        </aside>
+
+        <main class="content">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function toggleSidebar() {
+            document.body.classList.toggle("sidebar-open");
+        }
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+    <partial name="_DeleteModal" />
+
+</body>
+</html>

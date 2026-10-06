@@ -1,0 +1,9 @@
+# Build
+bin/
+obj/
+
+# User configs
+*.user
+
+# Secrets (NÃO subir pro GitHub)
+appsettings.Development.json

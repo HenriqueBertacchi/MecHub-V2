@@ -1,0 +1,162 @@
+@model MecHub.ViewModel.VeiculoResultadoConsultaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    ViewData["Title"] = "Status do Veículo";
+
+    var porcentagem = Model.EtapaAtual switch
+    {
+        1 => 0,
+        2 => 33,
+        3 => 66,
+        4 => 100,
+        _ => 0
+    };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/resultado-consulta.css" asp-append-version="true" />
+}
+
+<main class="result-page">
+
+    <section class="result-hero">
+        <div>
+            <span class="result-eyebrow">Acompanhamento em tempo real</span>
+            <h1>
+                MecHub
+    
+            </h1>
+            <p>
+                Veja o andamento do veículo, dados da ordem de serviço e contato do mecânico responsável.
+            </p>
+        </div>
+
+        <div class="plate-badge">
+            <span>PLACA</span>
+            <strong>@Model.Placa</strong>
+        </div>
+    </section>
+
+    <section class="result-grid">
+
+        <div class="result-card main-card">
+            <div class="card-title-row">
+                <h2>@Model.Marca @Model.Modelo</h2>
+                <span class="status-pill">@Model.StatusAtual</span>
+            </div>
+
+            <div class="vehicle-info-grid">
+                <div>
+                    <span>Cliente</span>
+                    <strong>@Model.NomeCliente</strong>
+                </div>
+
+                <div>
+                    <span>Cor</span>
+                    <strong>@Model.Cor</strong>
+                </div>
+
+                <div>
+                    <span>Última atualização</span>
+                    <strong>@Model.DataAtualizacaoStatus.ToString("dd/MM/yyyy HH:mm")</strong>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrWhiteSpace(Model.ObservacaoStatus))
+            {
+                <div class="mechanic-note">
+                    <span>Observação do mecânico</span>
+                    <p>@Model.ObservacaoStatus</p>
+                </div>
+            }
+
+            <div class="progress-area">
+                <div class="progress-header">
+                    <h3>Andamento da manutenção</h3>
+                    <strong>@porcentagem%</strong>
+                </div>
+
+                <div class="custom-progress">
+                    <div class="custom-progress-bar" style="width: @porcentagem%;"></div>
+                </div>
+            </div>
+
+            <div class="steps-grid">
+                @for (int i = 0; i < Model.Etapas.Count; i++)
+                {
+                    var numeroEtapa = i + 1;
+                    var concluida = numeroEtapa <= Model.EtapaAtual;
+                    var atual = numeroEtapa == Model.EtapaAtual;
+
+                    <div class="step-card step-@numeroEtapa @(concluida ? "done" : "") @(atual ? "current" : "")">
+                        <div class="step-number">@numeroEtapa</div>
+                        <div>
+                            <span>Etapa @numeroEtapa</span>
+                            <strong>@Model.Etapas[i]</strong>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <aside class="side-stack">
+
+            <div class="result-card action-card">
+                <div class="icon-circle pdf-icon">PDF</div>
+
+                <h3>Ordem de Serviço</h3>
+
+                @if (Model.PossuiOrdemServico)
+                {
+                    <p>A Ordem de Serviço já está disponível para download.</p>
+
+                    <a asp-controller="OrdemServico" asp-action="DownloadPdf" asp-route-id="@Model.OrdemServicoId"
+                           class="btn btn-outline-primary">
+                        Baixar OS em PDF
+                    </a>
+                }
+                else
+                {
+                    <p class="muted-text">
+                        A Ordem de Serviço ainda não foi gerada.
+                    </p>
+                }
+            </div>
+
+            <div class="result-card action-card">
+                <div class="icon-circle phone-icon">☎</div>
+
+                <h3>Mecânico responsável</h3>
+
+                <div class="mechanic-info">
+                    <span>Nome</span>
+                    <strong>@Model.NomeMecanico</strong>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.TelefoneMecanico))
+                {
+                    <div class="mechanic-info">
+                        <span>Telefone</span>
+                        <strong>@Model.TelefoneMecanico</strong>
+                    </div>
+
+                    <a href="tel:@Model.TelefoneMecanico" class="btn-action btn-phone">
+                        Ligar para o mecânico
+                    </a>
+                }
+                else
+                {
+                    <p class="muted-text">Telefone não informado.</p>
+                }
+            </div>
+
+            <a asp-action="Index" class="btn-new-search">
+                Nova consulta
+            </a>
+
+        </aside>
+
+    </section>
+
+</main>

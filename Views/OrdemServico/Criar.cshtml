@@ -1,0 +1,241 @@
+@model MecHub.ViewModel.OrdemServicoCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Criar Ordem de Serviço";
+}
+
+<link rel="stylesheet" href="~/css/criar-ordem.css" asp-append-version="true" />
+
+<section class="ordem-page">
+
+    <div class="ordem-header">
+        <div>
+            <h1>Nova Ordem de Serviço</h1>
+            <p>Crie e gerencie uma nova OS.</p>
+        </div>
+
+        <a asp-controller="OrdemServico"
+           asp-action="Index"
+           class="btn-voltar">
+            x
+        </a>
+    </div>
+
+    <div class="ordem-card">
+
+        <form asp-controller="OrdemServico"
+              asp-action="Criar"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="row g-4">
+
+                <!-- MECÂNICO -->
+                <div class="col-md-4">
+                    <label class="form-label">Mecânico responsável</label>
+
+                    <select asp-for="MecanicoId"
+                            asp-items="Model.Mecanicos"
+                            class="form-select input-dark">
+                    </select>
+
+                    <span asp-validation-for="MecanicoId" class="field-error"></span>
+                </div>
+
+                <!-- CLIENTE -->
+                <div class="col-md-4">
+                    <label class="form-label">Cliente</label>
+
+                    <select asp-for="ClienteId"
+                            asp-items="Model.Clientes"
+                            class="form-select input-dark">
+                        <option value="">Selecione...</option>
+                    </select>
+
+                    <span asp-validation-for="ClienteId" class="field-error"></span>
+                </div>
+
+                <!-- VEÍCULO -->
+                <div class="col-md-4">
+                    <label class="form-label">Veículo</label>
+
+                    <select asp-for="VeiculoId"
+                            asp-items="Model.Veiculos"
+                            class="form-select input-dark">
+                        <option value="">Selecione...</option>
+                    </select>
+
+                    <span asp-validation-for="VeiculoId" class="field-error"></span>
+                </div>
+
+                <!-- STATUS -->
+                <div class="col-md-4">
+                    <label class="form-label">Status</label>
+
+                    <select asp-for="StatusOrdem"
+                            asp-items="Model.StatusOptions"
+                            class="form-select input-dark">
+                    </select>
+
+                    <span asp-validation-for="StatusOrdem" class="field-error"></span>
+                </div>
+
+            </div>
+
+            <!-- ITENS -->
+            <div class="itens-wrapper">
+
+                <div class="itens-header">
+                    <h4>Itens da Ordem</h4>
+
+                    <button type="button"
+                            class="btn-add-item"
+                            onclick="adicionarItem()">
+                        + Adicionar Item
+                    </button>
+                </div>
+
+                <div id="itens-container">
+
+                    @if (Model.Itens != null && Model.Itens.Any())
+                    {
+                        for (int i = 0; i < Model.Itens.Count; i++)
+                        {
+                            <div class="item-row">
+
+                                <div class="row g-3 align-items-end">
+
+                                    <div class="col-md-7">
+                                        <label class="form-label">Serviço</label>
+
+                                        <select asp-for="Itens[i].ServicoId"
+                                                asp-items="Model.Servicos"
+                                                class="form-select input-dark">
+                                            <option value="">Selecione...</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="form-label">Quantidade</label>
+
+                                        <input asp-for="Itens[i].Quantidade"
+                                               class="form-control input-dark" />
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <button type="button"
+                                                class="btn-remover"
+                                                onclick="removerItem(this)">
+                                            Remover
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+                    }
+
+                </div>
+
+            </div>
+
+            <!-- AÇÕES -->
+            <div class="acoes-form">
+
+                <a asp-controller="OrdemServico"
+                   asp-action="Index"
+                   class="btn-cancelar">
+                    Cancelar
+                </a>
+
+                <button type="submit"
+                        class="btn-salvar">
+                    Gerar Ordem de Serviço
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        let itemIndex = @Model.Itens.Count;
+
+        function adicionarItem() {
+
+            const container = document.getElementById("itens-container");
+
+            const html = `
+                <div class="item-row">
+
+                    <div class="row g-3 align-items-end">
+
+                        <div class="col-md-7">
+
+                            <label class="form-label">Serviço</label>
+
+                            <select name="Itens[${itemIndex}].ServicoId"
+                                    class="form-select input-dark">
+
+                                <option value="">Selecione...</option>
+
+                                @foreach (var servico in Model.Servicos)
+                                {
+                                    <option value="@servico.Value">@servico.Text</option>
+                                }
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label class="form-label">Quantidade</label>
+
+                            <input type="number"
+                                   name="Itens[${itemIndex}].Quantidade"
+                                   value="1"
+                                   min="1"
+                                   class="form-control input-dark" />
+
+                        </div>
+
+                        <div class="col-md-2">
+
+                            <button type="button"
+                                    class="btn-remover"
+                                    onclick="removerItem(this)">
+                                Remover
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+            container.insertAdjacentHTML("beforeend", html);
+
+            itemIndex++;
+        }
+
+        function removerItem(button) {
+            button.closest(".item-row").remove();
+        }
+
+    </script>
+}

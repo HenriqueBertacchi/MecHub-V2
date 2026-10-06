@@ -1,0 +1,93 @@
+@model MecHub.ViewModel.LoginViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Login";
+}
+
+<main class="login-page">
+
+    <header class="register-header">
+        <a asp-controller="Home" asp-action="Index" class="header-logo">
+            MecHub
+        </a>
+
+        @* <nav class="header-menu">
+            <a asp-controller="Home" asp-action="Index" asp-fragment="servicos">Serviços</a>
+            <a asp-controller="Home" asp-action="Index" asp-fragment="beneficios">Benefícios</a>
+            <a asp-controller="Home" asp-action="Index" asp-fragment="quem-somos">Quem somos</a>
+        </nav> *@
+
+        <a asp-controller="Usuario" asp-action="Criar" class="btn-header-login">
+            Cadastro
+        </a>
+    </header>
+
+    <section class="login-card">
+
+        <div class="brand-background">
+            MECHUB
+        </div>
+
+        <h1>Login</h1>
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger text-center py-2">
+        </div>
+
+        <form asp-controller="Auth" asp-action="LoginLocal" method="post" class="login-form">
+
+            <div class="input-group-login">
+                <input asp-for="Email" placeholder="E-mail" autocomplete="username" />
+
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="input-group-login password-group">
+                <input asp-for="Senha" id="senha" placeholder="Senha" autocomplete="current-password" />
+
+                <button type="button" class="toggle-password" onclick="toggleSenha()">
+                    👁
+                </button>
+
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+
+            <div class="remember-box">
+                <label class="remember-label">
+                    <input asp-for="LembrarMe" />
+                    <span>Lembrar minha senha</span>
+                </label>
+            </div>
+            <a asp-controller="Auth" asp-action="EsqueciSenha" class="forgot-password">
+                Esqueci minha senha
+            </a>
+
+            <button type="submit" class="btn-login">
+                Entrar
+            </button>
+
+            <p class="login-divider">Ou entrar com</p>
+
+            <a asp-controller="Auth" asp-action="LoginGoogle" class="btn-google">
+                <span>Google</span>
+                <span class="google-icon">G</span>
+            </a>
+
+        </form>
+    </section>
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function toggleSenha() {
+            const senha = document.getElementById("senha");
+
+            senha.type =
+                senha.type === "password"
+                    ? "text"
+                    : "password";
+        }
+    </script>
+}

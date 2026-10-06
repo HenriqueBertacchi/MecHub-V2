@@ -1,0 +1,124 @@
+@model IEnumerable<MecHub.ViewModel.OrdemServicoListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Ordens de Serviço";
+}
+
+<link rel="stylesheet" href="~/css/listas.css" asp-append-version="true" />
+
+<section class="ordens-page">
+
+    <div class="ordens-header">
+        <div>
+            <h1>Ordens de Serviço</h1>
+            <p>Gerencie as ordens cadastradas no sistema.</p>
+        </div>
+
+        <a asp-controller="OrdemServico" asp-action="Criar" class="btn-nova-ordem">
+            + Criar Ordem
+        </a>
+    </div>
+
+    <div class="ordens-card">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <h2>Nenhuma ordem cadastrada</h2>
+                <p>Crie a primeira ordem de serviço para começar.</p>
+
+                <a asp-controller="OrdemServico" asp-action="Criar" class="btn-nova-ordem">
+                    Criar Ordem
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="ordens-table">
+                    <thead>
+                        <tr>
+                            <th>Nº OS</th>
+                            <th>Cliente</th>
+                            <th>Veículo</th>
+                            <th>Mecânico</th>
+                            <th>Status</th>
+                            <th>Itens</th>
+                            <th>Valor</th>
+                            <th>Criação</th>
+                            <th class="acoes-col">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var ordem in Model)
+                        {
+                            <tr>
+                                <td>#@ordem.Id</td>
+                                <td>@ordem.ClienteNome</td>
+                                <td>
+                                    <strong>@ordem.VeiculoPlaca</strong><br />
+                                    <span class="sub-info">@ordem.VeiculoMarca @ordem.VeiculoModelo</span>
+                                </td>
+                                <td>@ordem.MecanicoNome</td>
+                                <td>
+                                    <span class="status-badge @ordem.StatusClasse">
+                                        @ordem.StatusTexto
+                                    </span>
+                                </td>
+                                <td>@ordem.QuantidadeItens</td>
+                                <td>@ordem.ValorTotal.ToString("C")</td>
+                                <td>@ordem.DataCriacao.ToString("dd/MM/yyyy")</td>
+
+                                @* <td class="acoes">
+                                    @* <a asp-controller="OrdemServico" asp-action="Detalhes" asp-route-id="@ordem.Id"
+                                           class="btn-acao detalhes">
+                                        Detalhes
+                                    </a> 
+
+                                    <a asp-controller="OrdemServico" asp-action="GerarPdf" asp-route-id="@ordem.Id"
+                                           class="btn-acao pdf">
+                                        PDF
+                                    </a>
+                                    <a asp-controller="OrdemServico" asp-action="Editar" asp-route-id="@ordem.Id"
+                                           class="btn-acao editar">
+                                        Editar
+                                    </a>
+
+                                    <button type="button" class="btn-acao excluir" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"
+                                            data-delete-action="@Url.Action("ExcluirConfirmado", "OrdemServico", new { id = ordem.Id })"
+                                            data-delete-message="Você tem certeza que deseja excluir esse dado permanentemente do sistema? Essa ação é irreversível.">
+                                        Excluir
+                                    </button>
+                                </td> *@
+
+                                <td class="acoes-col">
+                                    <div class="acoes">
+                                        <a asp-controller="OrdemServico" asp-action="GerarPdf" asp-route-id="@ordem.Id"
+                                        class="btn-acao pdf">
+                                            PDF
+                                        </a>
+
+                                        <a asp-controller="OrdemServico" asp-action="Editar" asp-route-id="@ordem.Id"
+                                        class="btn-acao editar">
+                                            Editar
+                                        </a>
+
+                                        <button type="button" class="btn-acao excluir" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal"
+                                                data-delete-action="@Url.Action("ExcluirConfirmado", "OrdemServico", new { id = ordem.Id })"
+                                                data-delete-message="Você tem certeza que deseja excluir esse dado permanentemente do sistema? Essa ação é irreversível.">
+                                            Excluir
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+</section>

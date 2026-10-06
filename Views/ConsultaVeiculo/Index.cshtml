@@ -1,0 +1,52 @@
+@model MecHub.ViewModel.VeiculoConsultaViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    ViewData["Title"] = "Consulta Veicular";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/consulta-placa.css" asp-append-version="true" />
+}
+
+<div class="consulta-page">
+    <div class="consulta-card">
+
+        <h2 class="consulta-title">
+            Consulta Veicular
+        </h2>
+
+        <p class="consulta-description">
+            Informe a placa do veículo para acompanhar o andamento da manutenção.
+        </p>
+
+        @if (TempData["Erro"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["Erro"]
+            </div>
+        }
+
+        <form asp-action="Index" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-4">
+                <label asp-for="Placa" class="form-label consulta-label"></label>
+
+                <input asp-for="Placa"
+                       class="form-control consulta-input text-uppercase"
+                       placeholder="Ex: ABC1D23" />
+
+                <span asp-validation-for="Placa" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-consultar">
+                Consultar Status
+            </button>
+        </form>
+
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

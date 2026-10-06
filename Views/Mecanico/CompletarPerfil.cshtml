@@ -1,0 +1,55 @@
+@model MecHub.ViewModel.MecanicoCompletarPerfilViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+    ViewData["Title"] = "Completar Perfil";
+}
+
+<link rel="stylesheet" href="~/css/completar-perfil.css" asp-append-version="true" />
+
+<main class="completar-page">
+
+    <div class="brand-background">
+        MECHUB
+    </div>
+
+    <section class="completar-card">
+
+        <div class="completar-header">
+            <h1>Complete seu perfil</h1>
+
+            <p>
+                Precisamos de algumas informações antes de liberar o acesso completo ao sistema.
+            </p>
+        </div>
+
+        <form asp-action="CompletarPerfil"
+              asp-controller="Mecanico"
+              method="post"
+              class="completar-form">
+
+            @Html.AntiForgeryToken()
+
+            <div class="input-group">
+                <label asp-for="Telefone"></label>
+
+                <input asp-for="Telefone"
+                       placeholder="(11) 99999-9999" />
+
+                <span asp-validation-for="Telefone"
+                      class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-completar">
+                Salvar e continuar
+            </button>
+
+        </form>
+
+    </section>
+
+</main>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

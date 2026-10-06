@@ -1,0 +1,84 @@
+@model IEnumerable<MecHub.Models.Cliente>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Clientes";
+}
+
+<link rel="stylesheet" href="~/css/lista-clientes.css" asp-append-version="true" />
+
+<section class="clientes-page">
+
+    <div class="clientes-header">
+        <div>
+            <h1>Clientes</h1>
+            <p>Gerencie os clientes cadastrados no sistema.</p>
+        </div>
+
+        <a asp-controller="Cliente" asp-action="Criar" class="btn-novo-cliente">
+            + Novo Cliente
+        </a>
+    </div>
+
+    <div class="clientes-card">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <h2>Nenhum cliente cadastrado</h2>
+                <p>Cadastre o primeiro cliente para começar.</p>
+
+                <a asp-controller="Cliente" asp-action="Criar" class="btn-novo-cliente">
+                    Criar Cliente
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="clientes-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th>Veículos</th>
+                            <th class="acoes-col">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var cliente in Model)
+                        {
+                            <tr>
+                                <td>@cliente.Nome</td>
+                                <td>@cliente.Cpf</td>
+                                <td>@cliente.Telefone</td>
+                                <td>@cliente.Email</td>
+                                <td>
+                                    @(cliente.Veiculos != null ? cliente.Veiculos.Count : 0)
+                                </td>
+                                <td class="acoes">
+                                    <a asp-controller="Cliente"
+                                       asp-action="Editar"
+                                       asp-route-id="@cliente.Id"
+                                       class="btn-acao editar">
+                                        Editar
+                                    </a>
+
+                                    <a asp-controller="Cliente"
+                                       asp-action="Excluir"
+                                       asp-route-id="@cliente.Id"
+                                       class="btn-acao excluir">
+                                        Excluir
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+</section>

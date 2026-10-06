@@ -1,0 +1,144 @@
+@model MecHub.ViewModel.UsuarioCreateViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Criar Conta";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - MecHub</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/cadastro.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="register-page">
+
+        <header class="register-header">
+            <a asp-controller="Home" asp-action="Index" class="header-logo">
+                MecHub
+            </a>
+
+            <a asp-controller="Auth" asp-action="LoginLocal" class="btn-header-login">
+                Entrar
+            </a>
+        </header>
+
+        <section class="register-content">
+            <div class="register-box">
+
+                <h1 class="title-register">Altere sua senha</h1>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger text-center">
+                        Verifique os campos abaixo e tente novamente.
+                    </div>
+                }
+
+                <form asp-controller="Usuario" asp-action="Criar" method="post" class="register-form">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger text-center mb-3"></div>
+
+                    <div class="row g-3">
+
+                        <div class="col-12">
+                            <label asp-for="Nome" class="form-label">Nome:</label>
+                            <input asp-for="Nome" class="form-control register-input" placeholder="Nome completo" />
+                            <span asp-validation-for="Nome" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Senha" class="form-label">Senha:</label>
+                            <input asp-for="Senha" class="form-control register-input" placeholder="Mínimo 10 caracteres" />
+                            <span asp-validation-for="Senha" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="ConfirmarSenha" class="form-label">Confirmar senha:</label>
+                            <input asp-for="ConfirmarSenha" class="form-control register-input" placeholder="Digite a senha novamente" />
+                            <span asp-validation-for="ConfirmarSenha" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Email" class="form-label">Email:</label>
+                            <input asp-for="Email" class="form-control register-input" placeholder="seu@email.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12">
+                            <label asp-for="Telefone" class="form-label">Celular:</label>
+                            <input asp-for="Telefone" class="form-control register-input" placeholder="(11) 99999-9999" />
+                            <span asp-validation-for="Telefone" class="text-danger small"></span>
+                        </div>
+
+                    </div>
+
+                    <div class="actions-row">
+                        <a asp-controller="Auth" asp-action="LoginGoogle" class="btn-google-register">
+                            <span class="google-icon">G</span>
+                            Entrar com Google
+                        </a>
+
+                        <button type="submit" class="btn-submit-register">
+                            Finalizar Cadastro
+                        </button>
+                    </div>
+                </form>
+
+                <a asp-controller="Auth" asp-action="LoginLocal" class="back-link">
+                    Já tem uma conta? Faça login
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    @if (TempData["CadastroSucesso"] != null)
+    {
+        <div class="modal fade" id="modalSucessoCadastro" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark text-white border-0 rounded-4">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Cadastro realizado</h5>
+                    </div>
+
+                    <div class="modal-body">
+                        <p class="mb-0">@TempData["CadastroSucesso"]</p>
+                    </div>
+
+                    <div class="modal-footer border-0">
+                        <a asp-controller="Auth" asp-action="LoginLocal" class="btn btn-danger px-4 rounded-pill">
+                            OK
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+
+    @if (TempData["CadastroSucesso"] != null)
+    {
+        <script>
+            const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucessoCadastro'));
+            modalSucesso.show();
+        </script>
+    }
+</body>
+
+</html>

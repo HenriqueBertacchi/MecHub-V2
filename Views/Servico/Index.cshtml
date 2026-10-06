@@ -1,0 +1,103 @@
+@model IEnumerable<MecHub.ViewModel.ServicoListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Serviços";
+}
+
+<link rel="stylesheet" href="~/css/listas.css" asp-append-version="true" />
+
+<section class="servicos-page">
+
+    <div class="servicos-header">
+        <div>
+            <h1>Serviços</h1>
+            <p>Gerencie os serviços cadastrados no sistema.</p>
+        </div>
+
+        <a asp-controller="Servico" asp-action="Criar" class="btn-novo-servico">
+            + Novo Serviço
+        </a>
+    </div>
+
+    <div class="servicos-card">
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <h2>Nenhum serviço cadastrado</h2>
+                <p>Cadastre o primeiro serviço para começar.</p>
+
+                <a asp-controller="Servico" asp-action="Criar" class="btn-novo-servico">
+                    Criar Serviço
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+
+                <table class="servicos-table">
+
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Tipo</th>
+                            <th>Valor</th>
+                            <th class="acoes-col">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var servico in Model)
+                        {
+                            <tr>
+
+                                <td>@servico.Descricao</td>
+
+                                <td>
+                                    <span class="tipo-badge">
+                                        @servico.Tipo
+                                    </span>
+                                </td>
+
+                                <td>
+                                    @servico.Valor.ToString("C")
+                                </td>
+
+                                <td class="acoes">
+
+                                    @* <a asp-controller="Servico"
+                                       asp-action="Detalhe"
+                                       asp-route-id="@servico.Id"
+                                       class="btn-acao detalhes">
+                                        Detalhes
+                                    </a> *@
+
+                                    <a asp-controller="Servico" asp-action="Editar" asp-route-id="@servico.Id"
+                                           class="btn-acao editar">
+                                        Editar
+                                    </a>
+                                    <button type="button" class="btn-acao excluir" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"
+                                            data-delete-action="@Url.Action("DeletarConfirmado", "Servico", new { id = servico.Id })"
+                                            data-delete-message="Você tem certeza que deseja excluir esse dado permanentemente do sistema? Essa ação é irreversível.">
+                                        Excluir
+                                    </button>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        }
+
+    </div>
+
+</section>

@@ -1,0 +1,197 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+    ViewData["Title"] = "Home";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+}
+
+<header class="home-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand logo">
+                MecHub
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menuHome"
+                    aria-controls="menuHome"
+                    aria-expanded="false"
+                    aria-label="Abrir menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse mobile-menu" id="menuHome">
+                <div class="navbar-nav ms-auto align-items-lg-center">
+                    <a href="#servicos" class="nav-link-custom">Serviços</a>
+                    <a href="#beneficios" class="nav-link-custom">Benefícios</a>
+                    <a href="#quem-somos" class="nav-link-custom">Quem somos</a>
+
+                    <a asp-controller="ConsultaVeiculo" asp-action="Index" class="btn-outline-home ms-lg-3">
+                        Consultar
+                    </a>
+
+                    <a asp-controller="Usuario" asp-action="Criar" class="btn-outline-home">
+                        Criar Conta
+                    </a>
+
+                    <a asp-controller="Auth" asp-action="LoginLocal" class="btn-red">
+                        Entrar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <div class="hero-brand-vertical">MecHub</div>
+
+        <div>
+            <h1>Inove sua oficina</h1>
+            <h2>
+                Mais <span>transparência</span> para o cliente,<br />
+                e <span>eficiência</span> para o mecânico.
+            </h2>
+        </div>
+    </div>
+</section>
+
+<section id="servicos" class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Serviços Oferecidos</h2>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon red-circle">⚙️</div>
+                    <h3>Autopeças</h3>
+                    <p><strong>Controle</strong> e organize seu estoque de peças</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon purple-circle">🛠️</div>
+                    <h3>Oficina</h3>
+                    <p>Registre os <strong>serviços</strong> de <strong>reparos</strong> realizados, para maior <strong>controle</strong></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon lime-circle">🏆</div>
+                    <h3>Comunicação</h3>
+                    <p><strong>Mantenha</strong> seus <strong>clientes</strong> sempre <strong>atualizados</strong>. Evite <strong>surpresas</strong></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon green-circle">🛡️</div>
+                    <h3>Segurança</h3>
+                    <p>Mais <strong>segurança</strong> para o <strong>cliente</strong> e para o <strong>mecânico</strong></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon blue-circle">♿</div>
+                    <h3>Acessibilidade</h3>
+                    <p>Pensamos em <strong>você</strong>. Contamos com recursos de <strong>acessibilidade inclusiva</strong></p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="service-card">
+                    <div class="circle-icon orange-circle">🌐</div>
+                    <h3>Flexibilidade</h3>
+                    <p>Acompanhe seu <strong>veículo</strong> de <strong>qualquer lugar</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="beneficios" class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Por que a MecHub?</h2>
+
+        <div class="row g-5 text-start">
+            <div class="col-md-6">
+                <div class="why-card">
+                    <div class="emoji">🌐</div>
+                    <div>
+                        <h3>Acessibilidade</h3>
+                        <p>Sistema web acessível de qualquer lugar, proporcionando consulta e atualização fácil das informações.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="why-card">
+                    <div class="emoji">📋</div>
+                    <div>
+                        <h3>Organização dos Serviços</h3>
+                        <p>Registre e organize todas as ordens de serviço da oficina, facilitando o acompanhamento das manutenções.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="why-card">
+                    <div class="emoji">📦</div>
+                    <div>
+                        <h3>Controle de Peças</h3>
+                        <p>Gerencie o estoque de peças utilizadas nos serviços, evitando faltas e melhorando o planejamento.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="why-card">
+                    <div class="emoji">📲</div>
+                    <div>
+                        <h3>Transparência para o Cliente</h3>
+                        <p>Permite que o cliente acompanhe o andamento da manutenção do seu veículo, trazendo mais confiança e clareza.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="quem-somos" class="section">
+    <div class="container text-center">
+        <h2 class="section-title">Quem Somos</h2>
+
+        <div class="row align-items-center text-start g-5">
+            <div class="col-lg-6">
+                <p class="about-text">
+                    O MecHub é um sistema web criado para ajudar oficinas mecânicas a organizar e gerenciar seus serviços de forma mais simples e eficiente.
+                    A plataforma permite registrar clientes, veículos, ordens de serviço e controlar o estoque de peças utilizadas nos reparos.
+                </p>
+
+                <p class="about-text">
+                    Nosso objetivo é facilitar a rotina da oficina, reunindo todas as informações em um único sistema, tornando a gestão mais prática, organizada e segura.
+                </p>
+
+                <p class="about-text">
+                    Além disso, buscamos oferecer mais transparência para os clientes, permitindo que acompanhem o andamento da manutenção de seus veículos e tenham acesso ao status dos serviços realizados.
+                </p>
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <img src="/img/mecanico-dashboard.png"
+                     alt="Mecânico utilizando painel de controle do MecHub"
+                     class="about-img" />
+            </div>
+        </div>
+    </div>
+</section>

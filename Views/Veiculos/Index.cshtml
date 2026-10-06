@@ -1,0 +1,131 @@
+@model IEnumerable<MecHub.ViewModel.VeiculoListViewModel>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Veículos";
+}
+
+
+
+<link rel="stylesheet" href="~/css/listas.css" asp-append-version="true" />
+
+<section class="veiculos-page">
+
+    <div class="veiculos-header">
+        <div>
+            <h1>Veículos</h1>
+            <p>Gerencie os veículos cadastrados no sistema.</p>
+        </div>
+
+        <a asp-controller="Veiculos" asp-action="Criar" class="btn-novo-veiculo">
+            + Novo Veículo
+        </a>
+    </div>
+
+    <div class="veiculos-card">
+        @if (Model == null || !Model.Any())
+        {
+            <div class="empty-state">
+                <h2>Nenhum veículo cadastrado</h2>
+                <p>Cadastre o primeiro veículo para começar.</p>
+
+                <a asp-controller="Veiculos" asp-action="Criar" class="btn-novo-veiculo">
+                    Criar Veículo
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="veiculos-table">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Cor</th>
+                            <th>Ano</th>
+                            <th>Status</th>
+                            <th>Cliente</th>
+                            <th class="acoes-col">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var veiculo in Model)
+                        {
+                            <tr>
+                                <td>@veiculo.Placa</td>
+                                <td>@veiculo.Marca</td>
+                                <td>@veiculo.Modelo</td>
+                                <td>@veiculo.Cor</td>
+                                <td>@veiculo.AnoFabricacao</td>
+                                <td>
+
+                                    @{
+                                        string statusTexto = "";
+                                        string statusClasse = "";
+
+                                        switch (veiculo.StatusAtual)
+                                        {
+                                            case MecHub.Models.StatusVeiculoEnum.PreAvaliacao:
+                                                statusTexto = "Em avaliação";
+                                                statusClasse = "preavaliacao";
+                                                break;
+
+                                            case MecHub.Models.StatusVeiculoEnum.AguardandoAprovacaoOS:
+                                                statusTexto = "Aguardando aprovação OS";
+                                                statusClasse = "aguardandoaprovacao";
+                                                break;
+
+                                            case MecHub.Models.StatusVeiculoEnum.EmReparo:
+                                                statusTexto = "Em reparo";
+                                                statusClasse = "emreparo";
+                                                break;
+
+                                            case MecHub.Models.StatusVeiculoEnum.ProntoParaRetirada:
+                                                statusTexto = "Pronto para retirada";
+                                                statusClasse = "prontopararetirada";
+                                                break;
+
+                                            default:
+                                                statusTexto = "Não informado";
+                                                statusClasse = "naoinformado";
+                                                break;
+                                        }
+                                    }
+
+                                    <span class="status-badge @statusClasse">
+                                        @statusTexto
+                                    </span>
+
+                                </td>
+                                <td>@veiculo.ClienteNome</td>
+
+                                <td class="acoes">
+                                    @* <a asp-controller="Veiculos" asp-action="Detalhes" asp-route-id="@veiculo.Id"
+                                           class="btn-acao detalhes">
+                                        Detalhes
+                                    </a> *@
+
+                                    <a asp-controller="Veiculos" asp-action="Editar" asp-route-id="@veiculo.Id"
+                                           class="btn-acao editar">
+                                        Editar
+                                    </a>
+
+                                    <button type="button" class="btn-acao excluir" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"
+                                            data-delete-action="@Url.Action("ExcluirConfirmado", "Veiculos", new { id = veiculo.Id })"
+                                            data-delete-message="Você tem certeza que deseja excluir esse dado permanentemente do sistema? Essa ação é irreversível.">
+                                        Excluir
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+</section>

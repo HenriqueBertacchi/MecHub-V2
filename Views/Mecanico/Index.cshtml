@@ -1,0 +1,135 @@
+@using MecHub.Models
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Dashboard Mecânico";
+
+    var ultimasOrdens = ViewBag.UltimasOrdens as List<OrdemServico>;
+}
+
+<section class="topbar">
+    <div>
+        <h1>Dashboard do Mecânico</h1>
+        <p>Controle geral da oficina</p>
+    </div>
+
+    <div class="user-box">
+        <span>Olá,</span>
+        <strong>@User.Identity?.Name</strong>
+    </div>
+</section>
+
+<section class="metrics-grid">
+
+    <div class="metric-card">
+        <div class="metric-icon red">👥</div>
+        <div>
+            <h2>@ViewBag.TotalClientes</h2>
+            <p>Clientes</p>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon blue">🚗</div>
+        <div>
+            <h2>@ViewBag.TotalVeiculos</h2>
+            <p>Veículos</p>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon purple">🛠️</div>
+        <div>
+            <h2>@ViewBag.TotalServicos</h2>
+            <p>Serviços</p>
+        </div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-icon green">📋</div>
+        <div>
+            <h2>@ViewBag.TotalOrdens</h2>
+            <p>Ordens de Serviço</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="dashboard-grid">
+
+    <!-- AÇÕES -->
+    <div class="panel">
+        <h2>Ações rápidas</h2>
+
+        <div class="quick-grid">
+            <a asp-controller="Cliente" asp-action="Criar" class="quick-action">👥 Cliente</a>
+            <a asp-controller="Veiculos" asp-action="Criar" class="quick-action">🚗 Veículo</a>
+            <a asp-controller="Servico" asp-action="Criar" class="quick-action">🛠️ Serviço</a>
+            <a asp-controller="OrdemServico" asp-action="Criar" class="quick-action primary">📋 Nova OS</a>
+        </div>
+    </div>
+
+    <!-- STATUS -->
+    <div class="panel">
+        <h2>Status das OS</h2>
+
+        <div class="status-row">
+            <span>Abertas</span>
+            <strong>@ViewBag.OrdensAbertas</strong>
+        </div>
+
+        <div class="status-row">
+            <span>Em andamento</span>
+            <strong>@ViewBag.OrdensAndamento</strong>
+        </div>
+
+        <div class="status-row">
+            <span>Aguardando</span>
+            <strong>@ViewBag.OrdensAguardando</strong>
+        </div>
+
+        <div class="status-row">
+            <span>Fechadas</span>
+            <strong>@ViewBag.OrdensFechadas</strong>
+        </div>
+    </div>
+
+</section>
+
+<section class="panel">
+    <h2>Últimas Ordens</h2>
+
+    <div class="table-responsive">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Veículo</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (ultimasOrdens == null || !ultimasOrdens.Any())
+                {
+                    <tr>
+                        <td colspan="4">Sem dados</td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var item in ultimasOrdens)
+                    {
+                        <tr>
+                            <td>@item.Cliente?.Nome</td>
+                            <td>@item.Veiculo?.Modelo</td>
+                            <td>@item.StatusOrdem.ToString()</td>
+                            <td>@item.DataCriacao.ToString("dd/MM/yyyy")</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

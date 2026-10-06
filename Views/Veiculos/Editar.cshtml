@@ -1,0 +1,162 @@
+@model MecHub.ViewModel.VeiculoEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutMecanico.cshtml";
+    ViewData["Title"] = "Editar Veículo";
+}
+
+<link rel="stylesheet" href="~/css/forms.css" asp-append-version="true" />
+
+<section class="form-page">
+
+    <div class="form-header">
+        <div>
+            <span class="form-eyebrow">Edição</span>
+            <h1>Editar Veículo</h1>
+            <p>Atualize os dados do veículo, cliente vinculado e status atual.</p>
+        </div>
+
+        <a asp-controller="Veiculos"
+           asp-action="Index"
+           class="btn-close-form">
+            ×
+        </a>
+    </div>
+
+    <div class="form-card">
+
+        <form asp-controller="Veiculos"
+              asp-action="Editar"
+              asp-route-id="@Model.Id"
+              method="post">
+
+            @Html.AntiForgeryToken()
+
+            <input asp-for="Id" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-section-title">
+                <h4>Dados do veículo</h4>
+                <p>Revise as informações principais e atualize o acompanhamento do veículo.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <label asp-for="ClienteId" class="form-label">Cliente</label>
+
+                    <select asp-for="ClienteId"
+                            asp-items="Model.Clientes"
+                            class="form-select input-dark">
+                        <option value="">Selecione um cliente...</option>
+                    </select>
+
+                    <span asp-validation-for="ClienteId" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Placa" class="form-label">Placa</label>
+
+                    <input asp-for="Placa"
+                           class="form-control input-dark text-uppercase"
+                           placeholder="Ex: ABC1D23"
+                           maxlength="8" />
+
+                    <span asp-validation-for="Placa" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Marca" class="form-label">Marca</label>
+
+                    <input asp-for="Marca"
+                           class="form-control input-dark"
+                           placeholder="Ex: Volkswagen" />
+
+                    <span asp-validation-for="Marca" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Modelo" class="form-label">Modelo</label>
+
+                    <input asp-for="Modelo"
+                           class="form-control input-dark"
+                           placeholder="Ex: Gol 1.6" />
+
+                    <span asp-validation-for="Modelo" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="Cor" class="form-label">Cor</label>
+
+                    <input asp-for="Cor"
+                           class="form-control input-dark"
+                           placeholder="Ex: Preto" />
+
+                    <span asp-validation-for="Cor" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="AnoFabricacao" class="form-label">Ano de fabricação</label>
+
+                    <input asp-for="AnoFabricacao"
+                           type="number"
+                           class="form-control input-dark"
+                           placeholder="Ex: 2020"
+                           min="1900"
+                           max="2100" />
+
+                    <span asp-validation-for="AnoFabricacao" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="StatusAtual" class="form-label">Status atual</label>
+
+                    <select asp-for="StatusAtual"
+                            asp-items="Model.StatusOptions"
+                            class="form-select input-dark">
+                    </select>
+
+                    <span asp-validation-for="StatusAtual" class="field-error"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="ObservacaoStatus" class="form-label">Observação do status</label>
+
+                    <input asp-for="ObservacaoStatus"
+                           class="form-control input-dark"
+                           placeholder="Ex: Cliente aguardando aprovação" />
+
+                    <span asp-validation-for="ObservacaoStatus" class="field-error"></span>
+                </div>
+
+            </div>
+
+            <div class="form-info-box">
+                <strong>Atenção:</strong>
+                alterações no status serão refletidas na consulta pública feita pela placa do veículo.
+            </div>
+
+            <div class="form-actions">
+
+                <a asp-controller="Veiculos"
+                   asp-action="Index"
+                   class="btn-cancel">
+                    Cancelar
+                </a>
+
+                <button type="submit" class="btn-save">
+                    Salvar Alterações
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

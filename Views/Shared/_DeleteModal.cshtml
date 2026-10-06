@@ -1,0 +1,67 @@
+<div class="modal fade"
+     id="deleteModal"
+     tabindex="-1"
+     aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content delete-modal">
+
+            <div class="delete-modal-header">
+
+                <div>
+                    <span class="delete-eyebrow">
+                        Confirmação
+                    </span>
+
+                    <h5>
+                        Excluir registro?
+                    </h5>
+                </div>
+
+                <button type="button"
+                        class="btn-close-modal"
+                        data-bs-dismiss="modal">
+                    ×
+                </button>
+
+            </div>
+
+            <div class="delete-modal-body">
+
+                <p id="deleteModalMessage">
+                    Você tem certeza que deseja excluir esse dado permanentemente do sistema?
+                </p>
+
+                <span>
+                    Essa ação é irreversível.
+                </span>
+
+            </div>
+
+            <div class="delete-modal-actions">
+
+                <button type="button"
+                        class="btn-cancel-delete"
+                        data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <form id="deleteModalForm" method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="btn-confirm-delete">
+                        Confirmar exclusão
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

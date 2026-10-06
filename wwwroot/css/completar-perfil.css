@@ -1,0 +1,180 @@
+:root {
+    --red: #FF022E;
+    --red-dark: #d90027;
+    --black: #000;
+    --dark: #1d2024;
+    --border: #333;
+    --text-muted: #9ca3af;
+    --white: #fff;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.completar-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Texto gigante no fundo */
+
+.brand-background {
+    position: absolute;
+    font-size: 11rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.03);
+    letter-spacing: 12px;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.completar-card {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(29, 32, 36, 0.95);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 42px;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.completar-header {
+    margin-bottom: 32px;
+}
+
+.completar-header h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.completar-header p {
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-size: 0.98rem;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.completar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Grupo */
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Label */
+
+.input-group label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+/* Input */
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #111315;
+    color: var(--white);
+    font-size: 0.96rem;
+    transition: 0.2s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 4px rgba(255, 2, 46, 0.15);
+}
+
+/* Placeholder */
+
+.input-group input::placeholder {
+    color: #777;
+}
+
+/* Validation */
+
+.text-danger {
+    color: #ff5b76;
+    font-size: 0.85rem;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn-completar {
+    width: 100%;
+    border: none;
+    background: var(--red);
+    color: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+    margin-top: 8px;
+}
+
+.btn-completar:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+
+    .completar-card {
+        padding: 32px 24px;
+    }
+
+    .brand-background {
+        font-size: 5rem;
+        letter-spacing: 6px;
+    }
+
+    .completar-header h1 {
+        font-size: 1.7rem;
+    }
+}
